@@ -1,0 +1,1620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.3 (Python 3.10.1 on win32)" generated="20220114 13:33:37.426" rpa="false" schemaversion="2">
+<suite id="s1" name="Tests" source="C:\Users\Igor\projects\pythonProject\web\tests">
+<suite id="s1-s1" name="Book Trip Test" source="C:\Users\Igor\projects\pythonProject\web\tests\book_trip_test.robot">
+<test id="s1-s1-t1" name="User is able to book trip for two persons for first available date">
+<kw name="Run Keywords" library="BuiltIn" type="SETUP">
+<arg>Set test variables</arg>
+<arg>Open search page</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="Set test variables" library="setup_keywords">
+<kw name="Get File" library="OperatingSystem">
+<var>${file}</var>
+<arg>config/setup.json</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20220114 13:33:37.939" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\Igor\projects\pythonProject\config\setup.json"&gt;C:\Users\Igor\projects\pythonProject\config\setup.json&lt;/a&gt;'.</msg>
+<msg timestamp="20220114 13:33:37.940" level="INFO">${file} = {
+  "url": "https://fishingbooker:QAFBTest@qahiring.dev.fishingbooker.com/charters/view/22879",
+
+  "visa": {
+    "card_number": "4111111111111111",
+    "expiry_date": "10/25",
+    "cvv": "222"
+  }
+}</msg>
+<status status="PASS" starttime="20220114 13:33:37.939" endtime="20220114 13:33:37.940"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${json}</var>
+<arg>json.loads('''${file}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220114 13:33:37.940" level="INFO">${json} = {'url': 'https://fishingbooker:QAFBTest@qahiring.dev.fishingbooker.com/charters/view/22879', 'visa': {'card_number': '4111111111111111', 'expiry_date': '10/25', 'cvv': '222'}}</msg>
+<status status="PASS" starttime="20220114 13:33:37.940" endtime="20220114 13:33:37.940"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${URL}</arg>
+<arg>${json["url"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220114 13:33:37.941" level="INFO">${URL} = https://fishingbooker:QAFBTest@qahiring.dev.fishingbooker.com/charters/view/22879</msg>
+<status status="PASS" starttime="20220114 13:33:37.940" endtime="20220114 13:33:37.941"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${CARD_NUMBER}</arg>
+<arg>${json["visa"]["card_number"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220114 13:33:37.943" level="INFO">${CARD_NUMBER} = 4111111111111111</msg>
+<status status="PASS" starttime="20220114 13:33:37.941" endtime="20220114 13:33:37.943"/>
+</kw>
+<kw name="Remove String" library="String">
+<var>${expiry_date}</var>
+<arg>${json["visa"]["expiry_date"]}</arg>
+<arg>/</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<msg timestamp="20220114 13:33:37.943" level="INFO">${expiry_date} = 1025</msg>
+<status status="PASS" starttime="20220114 13:33:37.943" endtime="20220114 13:33:37.943"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${EXPIRY_DATE}</arg>
+<arg>${expiry_date}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220114 13:33:37.944" level="INFO">${EXPIRY_DATE} = 1025</msg>
+<status status="PASS" starttime="20220114 13:33:37.944" endtime="20220114 13:33:37.944"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${CVV}</arg>
+<arg>${json["visa"]["cvv"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220114 13:33:37.945" level="INFO">${CVV} = 222</msg>
+<status status="PASS" starttime="20220114 13:33:37.944" endtime="20220114 13:33:37.945"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:37.939" endtime="20220114 13:33:37.945"/>
+</kw>
+<kw name="Open search page" library="common">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>browser=chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20220114 13:33:37.946" level="INFO">Opening browser 'chrome' to base url 'https://fishingbooker:QAFBTest@qahiring.dev.fishingbooker.com/charters/view/22879'.</msg>
+<status status="PASS" starttime="20220114 13:33:37.946" endtime="20220114 13:33:41.016"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20220114 13:33:41.016" endtime="20220114 13:33:41.132"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:37.945" endtime="20220114 13:33:41.132"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:37.939" endtime="20220114 13:33:41.133"/>
+</kw>
+<kw name="Click on check availability" library="search_trip_page">
+<arg>Single Fisherman Special</arg>
+<kw name="Format String" library="String">
+<var>${element}</var>
+<arg>${CHECK_TRIP_AVAILABILITY_BTN}</arg>
+<arg>${trip_name}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20220114 13:33:41.134" level="INFO">${element} = //*[contains(text(),'Single Fisherman Special')]//following::*[contains(text(), 'View Availability')]</msg>
+<status status="PASS" starttime="20220114 13:33:41.133" endtime="20220114 13:33:41.134"/>
+</kw>
+<kw name="Click on element" library="common">
+<arg>${element}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:41.135" endtime="20220114 13:33:41.168"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:41.168" endtime="20220114 13:33:41.193"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:41.193" level="INFO">Clicking element '//*[contains(text(),'Single Fisherman Special')]//following::*[contains(text(), 'View Availability')]'.</msg>
+<status status="PASS" starttime="20220114 13:33:41.193" endtime="20220114 13:33:41.251"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:41.134" endtime="20220114 13:33:41.251"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:41.133" endtime="20220114 13:33:41.251"/>
+</kw>
+<kw name="Find and select first available date" library="search_trip_keywords">
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>12</value>
+<iter>
+<var name="${i}">0</var>
+<kw name="Check if month contains free date" library="search_trip_page">
+<var>${has_free_date}</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${condition}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220114 13:33:42.464" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-42.png"&gt;&lt;img src="selenium-screenshot-42.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220114 13:33:42.336" endtime="20220114 13:33:42.464"/>
+</kw>
+<msg timestamp="20220114 13:33:42.466" level="FAIL">false</msg>
+<status status="FAIL" starttime="20220114 13:33:41.252" endtime="20220114 13:33:42.466"/>
+</kw>
+<msg timestamp="20220114 13:33:42.466" level="INFO">${condition} = False</msg>
+<status status="PASS" starttime="20220114 13:33:41.252" endtime="20220114 13:33:42.466"/>
+</kw>
+<msg timestamp="20220114 13:33:42.466" level="INFO">${has_free_date} = False</msg>
+<status status="PASS" starttime="20220114 13:33:41.252" endtime="20220114 13:33:42.466"/>
+</kw>
+<if>
+<branch type="IF" condition="${has_free_date} == False">
+<kw name="Click on next month" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${NEXT_MONTH_BUTTON}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:42.467" endtime="20220114 13:33:42.482"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:42.482" endtime="20220114 13:33:42.488"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:42.489" level="INFO">Clicking element '//div[contains(@class, 'datepicker-days')]//th[contains(@class, 'next')]'.</msg>
+<status status="PASS" starttime="20220114 13:33:42.488" endtime="20220114 13:33:42.513"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:42.467" endtime="20220114 13:33:42.514"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:42.466" endtime="20220114 13:33:42.514"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:42.466" endtime="20220114 13:33:42.514"/>
+</branch>
+<branch type="ELSE">
+<kw name="Click on first available date" library="search_trip_page">
+<status status="NOT RUN" starttime="20220114 13:33:42.514" endtime="20220114 13:33:42.514"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:42.514" endtime="20220114 13:33:42.514"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:42.466" endtime="20220114 13:33:42.514"/>
+</if>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${has_free_date} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220114 13:33:42.515" endtime="20220114 13:33:42.515"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:41.252" endtime="20220114 13:33:42.515"/>
+</iter>
+<iter>
+<var name="${i}">1</var>
+<kw name="Check if month contains free date" library="search_trip_page">
+<var>${has_free_date}</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${condition}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220114 13:33:43.683" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-43.png"&gt;&lt;img src="selenium-screenshot-43.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220114 13:33:43.560" endtime="20220114 13:33:43.683"/>
+</kw>
+<msg timestamp="20220114 13:33:43.684" level="FAIL">false</msg>
+<status status="FAIL" starttime="20220114 13:33:42.515" endtime="20220114 13:33:43.684"/>
+</kw>
+<msg timestamp="20220114 13:33:43.684" level="INFO">${condition} = False</msg>
+<status status="PASS" starttime="20220114 13:33:42.515" endtime="20220114 13:33:43.684"/>
+</kw>
+<msg timestamp="20220114 13:33:43.684" level="INFO">${has_free_date} = False</msg>
+<status status="PASS" starttime="20220114 13:33:42.515" endtime="20220114 13:33:43.684"/>
+</kw>
+<if>
+<branch type="IF" condition="${has_free_date} == False">
+<kw name="Click on next month" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${NEXT_MONTH_BUTTON}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:43.685" endtime="20220114 13:33:43.695"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:43.695" endtime="20220114 13:33:43.701"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:43.701" level="INFO">Clicking element '//div[contains(@class, 'datepicker-days')]//th[contains(@class, 'next')]'.</msg>
+<status status="PASS" starttime="20220114 13:33:43.701" endtime="20220114 13:33:43.719"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:43.685" endtime="20220114 13:33:43.719"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:43.685" endtime="20220114 13:33:43.719"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:43.684" endtime="20220114 13:33:43.719"/>
+</branch>
+<branch type="ELSE">
+<kw name="Click on first available date" library="search_trip_page">
+<status status="NOT RUN" starttime="20220114 13:33:43.720" endtime="20220114 13:33:43.720"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:43.719" endtime="20220114 13:33:43.720"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:43.684" endtime="20220114 13:33:43.720"/>
+</if>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${has_free_date} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220114 13:33:43.720" endtime="20220114 13:33:43.720"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:42.515" endtime="20220114 13:33:43.720"/>
+</iter>
+<iter>
+<var name="${i}">2</var>
+<kw name="Check if month contains free date" library="search_trip_page">
+<var>${has_free_date}</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${condition}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220114 13:33:44.869" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-44.png"&gt;&lt;img src="selenium-screenshot-44.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220114 13:33:44.754" endtime="20220114 13:33:44.869"/>
+</kw>
+<msg timestamp="20220114 13:33:44.870" level="FAIL">false</msg>
+<status status="FAIL" starttime="20220114 13:33:43.721" endtime="20220114 13:33:44.870"/>
+</kw>
+<msg timestamp="20220114 13:33:44.870" level="INFO">${condition} = False</msg>
+<status status="PASS" starttime="20220114 13:33:43.720" endtime="20220114 13:33:44.870"/>
+</kw>
+<msg timestamp="20220114 13:33:44.870" level="INFO">${has_free_date} = False</msg>
+<status status="PASS" starttime="20220114 13:33:43.720" endtime="20220114 13:33:44.870"/>
+</kw>
+<if>
+<branch type="IF" condition="${has_free_date} == False">
+<kw name="Click on next month" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${NEXT_MONTH_BUTTON}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:44.871" endtime="20220114 13:33:44.880"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:44.880" endtime="20220114 13:33:44.886"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:44.886" level="INFO">Clicking element '//div[contains(@class, 'datepicker-days')]//th[contains(@class, 'next')]'.</msg>
+<status status="PASS" starttime="20220114 13:33:44.886" endtime="20220114 13:33:44.909"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:44.870" endtime="20220114 13:33:44.909"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:44.870" endtime="20220114 13:33:44.909"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:44.870" endtime="20220114 13:33:44.910"/>
+</branch>
+<branch type="ELSE">
+<kw name="Click on first available date" library="search_trip_page">
+<status status="NOT RUN" starttime="20220114 13:33:44.910" endtime="20220114 13:33:44.910"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:44.910" endtime="20220114 13:33:44.910"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:44.870" endtime="20220114 13:33:44.910"/>
+</if>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${has_free_date} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220114 13:33:44.910" endtime="20220114 13:33:44.910"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:43.720" endtime="20220114 13:33:44.910"/>
+</iter>
+<iter>
+<var name="${i}">3</var>
+<kw name="Check if month contains free date" library="search_trip_page">
+<var>${has_free_date}</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${condition}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220114 13:33:46.111" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-45.png"&gt;&lt;img src="selenium-screenshot-45.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220114 13:33:45.989" endtime="20220114 13:33:46.111"/>
+</kw>
+<msg timestamp="20220114 13:33:46.112" level="FAIL">false</msg>
+<status status="FAIL" starttime="20220114 13:33:44.911" endtime="20220114 13:33:46.112"/>
+</kw>
+<msg timestamp="20220114 13:33:46.112" level="INFO">${condition} = False</msg>
+<status status="PASS" starttime="20220114 13:33:44.911" endtime="20220114 13:33:46.112"/>
+</kw>
+<msg timestamp="20220114 13:33:46.112" level="INFO">${has_free_date} = False</msg>
+<status status="PASS" starttime="20220114 13:33:44.910" endtime="20220114 13:33:46.112"/>
+</kw>
+<if>
+<branch type="IF" condition="${has_free_date} == False">
+<kw name="Click on next month" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${NEXT_MONTH_BUTTON}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:46.113" endtime="20220114 13:33:46.125"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:46.125" endtime="20220114 13:33:46.131"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:46.132" level="INFO">Clicking element '//div[contains(@class, 'datepicker-days')]//th[contains(@class, 'next')]'.</msg>
+<status status="PASS" starttime="20220114 13:33:46.131" endtime="20220114 13:33:46.148"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:46.113" endtime="20220114 13:33:46.148"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:46.112" endtime="20220114 13:33:46.148"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:46.112" endtime="20220114 13:33:46.148"/>
+</branch>
+<branch type="ELSE">
+<kw name="Click on first available date" library="search_trip_page">
+<status status="NOT RUN" starttime="20220114 13:33:46.149" endtime="20220114 13:33:46.149"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:46.149" endtime="20220114 13:33:46.149"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:46.112" endtime="20220114 13:33:46.149"/>
+</if>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${has_free_date} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220114 13:33:46.149" endtime="20220114 13:33:46.149"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:44.910" endtime="20220114 13:33:46.149"/>
+</iter>
+<iter>
+<var name="${i}">4</var>
+<kw name="Check if month contains free date" library="search_trip_page">
+<var>${has_free_date}</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${condition}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220114 13:33:47.343" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-46.png"&gt;&lt;img src="selenium-screenshot-46.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220114 13:33:47.222" endtime="20220114 13:33:47.343"/>
+</kw>
+<msg timestamp="20220114 13:33:47.344" level="FAIL">false</msg>
+<status status="FAIL" starttime="20220114 13:33:46.150" endtime="20220114 13:33:47.344"/>
+</kw>
+<msg timestamp="20220114 13:33:47.344" level="INFO">${condition} = False</msg>
+<status status="PASS" starttime="20220114 13:33:46.150" endtime="20220114 13:33:47.344"/>
+</kw>
+<msg timestamp="20220114 13:33:47.344" level="INFO">${has_free_date} = False</msg>
+<status status="PASS" starttime="20220114 13:33:46.149" endtime="20220114 13:33:47.344"/>
+</kw>
+<if>
+<branch type="IF" condition="${has_free_date} == False">
+<kw name="Click on next month" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${NEXT_MONTH_BUTTON}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:47.345" endtime="20220114 13:33:47.354"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:47.354" endtime="20220114 13:33:47.361"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:47.361" level="INFO">Clicking element '//div[contains(@class, 'datepicker-days')]//th[contains(@class, 'next')]'.</msg>
+<status status="PASS" starttime="20220114 13:33:47.361" endtime="20220114 13:33:47.377"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:47.345" endtime="20220114 13:33:47.377"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:47.344" endtime="20220114 13:33:47.377"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:47.344" endtime="20220114 13:33:47.377"/>
+</branch>
+<branch type="ELSE">
+<kw name="Click on first available date" library="search_trip_page">
+<status status="NOT RUN" starttime="20220114 13:33:47.378" endtime="20220114 13:33:47.378"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:47.377" endtime="20220114 13:33:47.378"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:47.344" endtime="20220114 13:33:47.378"/>
+</if>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${has_free_date} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220114 13:33:47.378" endtime="20220114 13:33:47.378"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:46.149" endtime="20220114 13:33:47.378"/>
+</iter>
+<iter>
+<var name="${i}">5</var>
+<kw name="Check if month contains free date" library="search_trip_page">
+<var>${has_free_date}</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${condition}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220114 13:33:48.593" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-47.png"&gt;&lt;img src="selenium-screenshot-47.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220114 13:33:48.468" endtime="20220114 13:33:48.593"/>
+</kw>
+<msg timestamp="20220114 13:33:48.594" level="FAIL">false</msg>
+<status status="FAIL" starttime="20220114 13:33:47.379" endtime="20220114 13:33:48.594"/>
+</kw>
+<msg timestamp="20220114 13:33:48.594" level="INFO">${condition} = False</msg>
+<status status="PASS" starttime="20220114 13:33:47.379" endtime="20220114 13:33:48.594"/>
+</kw>
+<msg timestamp="20220114 13:33:48.594" level="INFO">${has_free_date} = False</msg>
+<status status="PASS" starttime="20220114 13:33:47.378" endtime="20220114 13:33:48.594"/>
+</kw>
+<if>
+<branch type="IF" condition="${has_free_date} == False">
+<kw name="Click on next month" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${NEXT_MONTH_BUTTON}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:48.595" endtime="20220114 13:33:48.606"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:48.606" endtime="20220114 13:33:48.612"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:48.613" level="INFO">Clicking element '//div[contains(@class, 'datepicker-days')]//th[contains(@class, 'next')]'.</msg>
+<status status="PASS" starttime="20220114 13:33:48.612" endtime="20220114 13:33:48.629"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:48.595" endtime="20220114 13:33:48.629"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:48.594" endtime="20220114 13:33:48.629"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:48.594" endtime="20220114 13:33:48.629"/>
+</branch>
+<branch type="ELSE">
+<kw name="Click on first available date" library="search_trip_page">
+<status status="NOT RUN" starttime="20220114 13:33:48.629" endtime="20220114 13:33:48.629"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:48.629" endtime="20220114 13:33:48.629"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:48.594" endtime="20220114 13:33:48.629"/>
+</if>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${has_free_date} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20220114 13:33:48.629" endtime="20220114 13:33:48.630"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:47.378" endtime="20220114 13:33:48.630"/>
+</iter>
+<iter>
+<var name="${i}">6</var>
+<kw name="Check if month contains free date" library="search_trip_page">
+<var>${has_free_date}</var>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${condition}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220114 13:33:48.630" endtime="20220114 13:33:48.634"/>
+</kw>
+<msg timestamp="20220114 13:33:48.634" level="INFO">${condition} = True</msg>
+<status status="PASS" starttime="20220114 13:33:48.630" endtime="20220114 13:33:48.635"/>
+</kw>
+<msg timestamp="20220114 13:33:48.635" level="INFO">${has_free_date} = True</msg>
+<status status="PASS" starttime="20220114 13:33:48.630" endtime="20220114 13:33:48.635"/>
+</kw>
+<if>
+<branch type="IF" condition="${has_free_date} == False">
+<kw name="Click on next month" library="search_trip_page">
+<status status="NOT RUN" starttime="20220114 13:33:48.635" endtime="20220114 13:33:48.635"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:48.635" endtime="20220114 13:33:48.635"/>
+</branch>
+<branch type="ELSE">
+<kw name="Click on first available date" library="search_trip_page">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${condition}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${FIRST_AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${FIRST_AVAILABLE_DATE}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220114 13:33:48.785" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-48.png"&gt;&lt;img src="selenium-screenshot-48.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220114 13:33:48.647" endtime="20220114 13:33:48.785"/>
+</kw>
+<msg timestamp="20220114 13:33:48.787" level="FAIL">InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=97.0.4692.71)
+Stacktrace:
+Backtrace:
+	Ordinal0 [0x00F56903+2517251]
+	Ordinal0 [0x00EEF8E1+2095329]
+	Ordinal0 [0x00DF2848+1058888]
+	Ordinal0 [0x00DF4F44+1068868]
+	Ordinal0 [0x00DF4E0E+1068558]
+	Ordinal0 [0x00DF5070+1069168]
+	Ordinal0 [0x00E1D1C2+1233346]
+	Ordinal0 [0x00E1D63B+1234491]
+	Ordinal0 [0x00E4784C+1407052]
+	Ordinal0 [0x00E3650A+1336586]
+	Ordinal0 [0x00E45BBF+1399743]
+	Ordinal0 [0x00E3639B+1336219]
+	Ordinal0 [0x00E127A7+1189799]
+	Ordinal0 [0x00E13609+1193481]
+	GetHandleVerifier [0x010E5904+1577972]
+	GetHandleVerifier [0x01190B97+2279047]
+	GetHandleVerifier [0x00FE6D09+534521]
+	GetHandleVerifier [0x00FE5DB9+530601]
+	Ordinal0 [0x00EF4FF9+2117625]
+	Ordinal0 [0x00EF98A8+2136232]
+	Ordinal0 [0x00EF99E2+2136546]
+	Ordinal0 [0x00F03541+2176321]
+	BaseThreadInitThunk [0x755DF989+25]
+	RtlGetAppContainerNamedObjectPath [0x77257084+228]
+	RtlGetAppContainerNamedObjectPath [0x77257054+180]
+</msg>
+<status status="FAIL" starttime="20220114 13:33:48.635" endtime="20220114 13:33:48.787"/>
+</kw>
+<msg timestamp="20220114 13:33:48.787" level="INFO">${condition} = False</msg>
+<status status="PASS" starttime="20220114 13:33:48.635" endtime="20220114 13:33:48.787"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>31</value>
+<iter>
+<var name="${i}">0</var>
+<kw name="Format String" library="String">
+<var>${element}</var>
+<arg>${FIRST_AVAILABLE_DATE}</arg>
+<arg>${i}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20220114 13:33:48.788" level="INFO">${element} = css:td[class='day']:nth-of-type(0)</msg>
+<status status="PASS" starttime="20220114 13:33:48.787" endtime="20220114 13:33:48.788"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${present}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${element}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220114 13:33:49.969" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-49.png"&gt;&lt;img src="selenium-screenshot-49.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220114 13:33:49.847" endtime="20220114 13:33:49.970"/>
+</kw>
+<msg timestamp="20220114 13:33:49.970" level="FAIL">false</msg>
+<status status="FAIL" starttime="20220114 13:33:48.788" endtime="20220114 13:33:49.970"/>
+</kw>
+<msg timestamp="20220114 13:33:49.970" level="INFO">${present} = False</msg>
+<status status="PASS" starttime="20220114 13:33:48.788" endtime="20220114 13:33:49.970"/>
+</kw>
+<if>
+<branch type="IF" condition="${present} == True">
+<kw name="Click on element" library="common">
+<arg>${element}</arg>
+<status status="NOT RUN" starttime="20220114 13:33:49.971" endtime="20220114 13:33:49.971"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${present} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20220114 13:33:49.971" endtime="20220114 13:33:49.971"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:49.970" endtime="20220114 13:33:49.971"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Error, could't find free date!</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20220114 13:33:49.971" level="INFO">Error, could't find free date!</msg>
+<status status="PASS" starttime="20220114 13:33:49.971" endtime="20220114 13:33:49.971"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:49.971" endtime="20220114 13:33:49.971"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:49.970" endtime="20220114 13:33:49.971"/>
+</if>
+<status status="PASS" starttime="20220114 13:33:48.787" endtime="20220114 13:33:49.971"/>
+</iter>
+<iter>
+<var name="${i}">1</var>
+<kw name="Format String" library="String">
+<var>${element}</var>
+<arg>${FIRST_AVAILABLE_DATE}</arg>
+<arg>${i}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20220114 13:33:49.971" level="INFO">${element} = css:td[class='day']:nth-of-type(1)</msg>
+<status status="PASS" starttime="20220114 13:33:49.971" endtime="20220114 13:33:49.971"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${present}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${element}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220114 13:33:51.169" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-50.png"&gt;&lt;img src="selenium-screenshot-50.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220114 13:33:51.048" endtime="20220114 13:33:51.169"/>
+</kw>
+<msg timestamp="20220114 13:33:51.170" level="FAIL">false</msg>
+<status status="FAIL" starttime="20220114 13:33:49.972" endtime="20220114 13:33:51.170"/>
+</kw>
+<msg timestamp="20220114 13:33:51.170" level="INFO">${present} = False</msg>
+<status status="PASS" starttime="20220114 13:33:49.971" endtime="20220114 13:33:51.170"/>
+</kw>
+<if>
+<branch type="IF" condition="${present} == True">
+<kw name="Click on element" library="common">
+<arg>${element}</arg>
+<status status="NOT RUN" starttime="20220114 13:33:51.170" endtime="20220114 13:33:51.170"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${present} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20220114 13:33:51.171" endtime="20220114 13:33:51.171"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:51.170" endtime="20220114 13:33:51.171"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Error, could't find free date!</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20220114 13:33:51.171" level="INFO">Error, could't find free date!</msg>
+<status status="PASS" starttime="20220114 13:33:51.171" endtime="20220114 13:33:51.171"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:51.171" endtime="20220114 13:33:51.171"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:51.170" endtime="20220114 13:33:51.171"/>
+</if>
+<status status="PASS" starttime="20220114 13:33:49.971" endtime="20220114 13:33:51.171"/>
+</iter>
+<iter>
+<var name="${i}">2</var>
+<kw name="Format String" library="String">
+<var>${element}</var>
+<arg>${FIRST_AVAILABLE_DATE}</arg>
+<arg>${i}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20220114 13:33:51.171" level="INFO">${element} = css:td[class='day']:nth-of-type(2)</msg>
+<status status="PASS" starttime="20220114 13:33:51.171" endtime="20220114 13:33:51.171"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${present}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${element}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220114 13:33:52.366" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-51.png"&gt;&lt;img src="selenium-screenshot-51.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20220114 13:33:52.248" endtime="20220114 13:33:52.366"/>
+</kw>
+<msg timestamp="20220114 13:33:52.367" level="FAIL">false</msg>
+<status status="FAIL" starttime="20220114 13:33:51.172" endtime="20220114 13:33:52.367"/>
+</kw>
+<msg timestamp="20220114 13:33:52.367" level="INFO">${present} = False</msg>
+<status status="PASS" starttime="20220114 13:33:51.171" endtime="20220114 13:33:52.367"/>
+</kw>
+<if>
+<branch type="IF" condition="${present} == True">
+<kw name="Click on element" library="common">
+<arg>${element}</arg>
+<status status="NOT RUN" starttime="20220114 13:33:52.367" endtime="20220114 13:33:52.367"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${present} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20220114 13:33:52.367" endtime="20220114 13:33:52.367"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:52.367" endtime="20220114 13:33:52.368"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Error, could't find free date!</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20220114 13:33:52.368" level="INFO">Error, could't find free date!</msg>
+<status status="PASS" starttime="20220114 13:33:52.368" endtime="20220114 13:33:52.368"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.368" endtime="20220114 13:33:52.368"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:52.367" endtime="20220114 13:33:52.368"/>
+</if>
+<status status="PASS" starttime="20220114 13:33:51.171" endtime="20220114 13:33:52.368"/>
+</iter>
+<iter>
+<var name="${i}">3</var>
+<kw name="Format String" library="String">
+<var>${element}</var>
+<arg>${FIRST_AVAILABLE_DATE}</arg>
+<arg>${i}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20220114 13:33:52.368" level="INFO">${element} = css:td[class='day']:nth-of-type(3)</msg>
+<status status="PASS" starttime="20220114 13:33:52.368" endtime="20220114 13:33:52.368"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${present}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${element}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=1</arg>
+<arg>error=false</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20220114 13:33:52.368" endtime="20220114 13:33:52.375"/>
+</kw>
+<msg timestamp="20220114 13:33:52.375" level="INFO">${present} = True</msg>
+<status status="PASS" starttime="20220114 13:33:52.368" endtime="20220114 13:33:52.375"/>
+</kw>
+<if>
+<branch type="IF" condition="${present} == True">
+<kw name="Click on element" library="common">
+<arg>${element}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:52.375" endtime="20220114 13:33:52.384"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:52.384" endtime="20220114 13:33:52.389"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:52.390" level="INFO">Clicking element 'css:td[class='day']:nth-of-type(3)'.</msg>
+<status status="PASS" starttime="20220114 13:33:52.389" endtime="20220114 13:33:52.428"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.375" endtime="20220114 13:33:52.428"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${present} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<msg timestamp="20220114 13:33:52.428" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20220114 13:33:52.428" endtime="20220114 13:33:52.428"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.375" endtime="20220114 13:33:52.429"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Error, could't find free date!</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20220114 13:33:52.429" endtime="20220114 13:33:52.429"/>
+</kw>
+<status status="NOT RUN" starttime="20220114 13:33:52.429" endtime="20220114 13:33:52.429"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:52.375" endtime="20220114 13:33:52.429"/>
+</if>
+<status status="PASS" starttime="20220114 13:33:52.368" endtime="20220114 13:33:52.429"/>
+</iter>
+<status status="PASS" starttime="20220114 13:33:48.787" endtime="20220114 13:33:52.429"/>
+</for>
+<status status="PASS" starttime="20220114 13:33:48.635" endtime="20220114 13:33:52.429"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:48.635" endtime="20220114 13:33:52.429"/>
+</branch>
+<status status="PASS" starttime="20220114 13:33:48.635" endtime="20220114 13:33:52.429"/>
+</if>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${has_free_date} == True</arg>
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<msg timestamp="20220114 13:33:52.430" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20220114 13:33:52.429" endtime="20220114 13:33:52.430"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:48.630" endtime="20220114 13:33:52.430"/>
+</iter>
+<status status="PASS" starttime="20220114 13:33:41.251" endtime="20220114 13:33:52.430"/>
+</for>
+<status status="PASS" starttime="20220114 13:33:41.251" endtime="20220114 13:33:52.430"/>
+</kw>
+<kw name="Chose the trip" library="search_trip_keywords">
+<kw name="Click on persons dropdown" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${PERSONS_DROPDOWN}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:52.431" endtime="20220114 13:33:52.447"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:52.447" endtime="20220114 13:33:52.455"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:52.455" level="INFO">Clicking element '//*[contains(@class, 'row packages-form-header')]//child::*[contains(@class, 'search-form-persons')]'.</msg>
+<status status="PASS" starttime="20220114 13:33:52.455" endtime="20220114 13:33:52.487"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.431" endtime="20220114 13:33:52.488"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.431" endtime="20220114 13:33:52.488"/>
+</kw>
+<kw name="Click on adults minus button" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${ADULTS_MINUS_BTN}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:52.488" endtime="20220114 13:33:52.522"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:52.523" endtime="20220114 13:33:52.547"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:52.548" level="INFO">Clicking element '//*[@id='charter-trips']//following::button[@class= 'fbkr-button white adults-children-btn adults-minus']'.</msg>
+<status status="PASS" starttime="20220114 13:33:52.548" endtime="20220114 13:33:52.595"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.488" endtime="20220114 13:33:52.595"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.488" endtime="20220114 13:33:52.595"/>
+</kw>
+<kw name="Click on children plus button" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${CHILDREN_PLUS_BTN}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:52.596" endtime="20220114 13:33:52.627"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:52.628" endtime="20220114 13:33:52.650"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:52.651" level="INFO">Clicking element '//*[@id='charter-trips']//following::button[@class= 'fbkr-button white adults-children-btn children-plus']'.</msg>
+<status status="PASS" starttime="20220114 13:33:52.651" endtime="20220114 13:33:52.698"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.596" endtime="20220114 13:33:52.698"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.595" endtime="20220114 13:33:52.698"/>
+</kw>
+<kw name="Click on main check availability button" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${CHECK_AVAILABILITY_MAIN_BTN}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:52.699" endtime="20220114 13:33:52.710"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:52.710" endtime="20220114 13:33:52.717"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:52.717" level="INFO">Clicking element 'css:#check-availability-btn'.</msg>
+<status status="PASS" starttime="20220114 13:33:52.717" endtime="20220114 13:33:52.760"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.698" endtime="20220114 13:33:52.760"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.698" endtime="20220114 13:33:52.760"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.430" endtime="20220114 13:33:52.760"/>
+</kw>
+<kw name="Click on instant book" library="search_trip_page">
+<kw name="Click on element" library="common">
+<arg>${INSTANT_BOOK}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:52.761" endtime="20220114 13:33:53.227"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:53.228" endtime="20220114 13:33:53.234"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:53.234" level="INFO">Clicking element 'css:#bookbtn-0'.</msg>
+<status status="PASS" starttime="20220114 13:33:53.234" endtime="20220114 13:33:54.516"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.761" endtime="20220114 13:33:54.516"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:52.761" endtime="20220114 13:33:54.516"/>
+</kw>
+<kw name="Enter user details" library="user_details_keywords">
+<kw name="Enter user name" library="user_details_keywords">
+<kw name="Get random name" library="data_creation">
+<var>${name}</var>
+<kw name="First Name Female" library="FakerLibrary">
+<var>${name}</var>
+<msg timestamp="20220114 13:33:54.517" level="INFO">${name} = Lori</msg>
+<status status="PASS" starttime="20220114 13:33:54.517" endtime="20220114 13:33:54.518"/>
+</kw>
+<msg timestamp="20220114 13:33:54.518" level="INFO">${name} = Lori</msg>
+<status status="PASS" starttime="20220114 13:33:54.517" endtime="20220114 13:33:54.518"/>
+</kw>
+<kw name="Enter text" library="common">
+<arg>${NAME_INPUT}</arg>
+<arg>${name}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:54.518" endtime="20220114 13:33:55.041"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:55.042" level="INFO">Typing text 'Lori' into text field '//*[@placeholder='Enter your first name']'.</msg>
+<status status="PASS" starttime="20220114 13:33:55.041" endtime="20220114 13:33:55.107"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:54.518" endtime="20220114 13:33:55.107"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${NAME}</arg>
+<arg>${name}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220114 13:33:55.108" level="INFO">${NAME} = Lori</msg>
+<status status="PASS" starttime="20220114 13:33:55.108" endtime="20220114 13:33:55.108"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:54.517" endtime="20220114 13:33:55.108"/>
+</kw>
+<kw name="Enter user last name" library="user_details_keywords">
+<kw name="Get random last name" library="data_creation">
+<var>${last_name}</var>
+<kw name="Last Name Female" library="FakerLibrary">
+<var>${surname}</var>
+<msg timestamp="20220114 13:33:55.109" level="INFO">${surname} = Pierce</msg>
+<status status="PASS" starttime="20220114 13:33:55.109" endtime="20220114 13:33:55.109"/>
+</kw>
+<msg timestamp="20220114 13:33:55.109" level="INFO">${last_name} = Pierce</msg>
+<status status="PASS" starttime="20220114 13:33:55.108" endtime="20220114 13:33:55.109"/>
+</kw>
+<kw name="Enter text" library="common">
+<arg>${LAST_NAME_INPUT}</arg>
+<arg>${last_name}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:55.110" endtime="20220114 13:33:55.123"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:55.124" level="INFO">Typing text 'Pierce' into text field '//*[@placeholder='Enter your last name']'.</msg>
+<status status="PASS" starttime="20220114 13:33:55.124" endtime="20220114 13:33:55.191"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.109" endtime="20220114 13:33:55.191"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${LAST_NAME}</arg>
+<arg>${last_name}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220114 13:33:55.191" level="INFO">${LAST_NAME} = Pierce</msg>
+<status status="PASS" starttime="20220114 13:33:55.191" endtime="20220114 13:33:55.192"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.108" endtime="20220114 13:33:55.192"/>
+</kw>
+<kw name="Enter email" library="user_details_keywords">
+<kw name="Generate email adress" library="data_creation">
+<var>${email}</var>
+<arg>${NAME}</arg>
+<arg>${LAST_NAME}</arg>
+<kw name="Convert To Lower Case" library="String">
+<var>${user_name}</var>
+<arg>${name}</arg>
+<doc>Converts string to lower case.</doc>
+<msg timestamp="20220114 13:33:55.193" level="INFO">${user_name} = lori</msg>
+<status status="PASS" starttime="20220114 13:33:55.192" endtime="20220114 13:33:55.193"/>
+</kw>
+<kw name="Convert To Lower Case" library="String">
+<var>${user_last_name}</var>
+<arg>${last_name}</arg>
+<doc>Converts string to lower case.</doc>
+<msg timestamp="20220114 13:33:55.193" level="INFO">${user_last_name} = pierce</msg>
+<status status="PASS" starttime="20220114 13:33:55.193" endtime="20220114 13:33:55.193"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${email}</var>
+<arg>${user_name}${user_last_name}@randomemail.com</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20220114 13:33:55.193" level="INFO">${email} = loripierce@randomemail.com</msg>
+<status status="PASS" starttime="20220114 13:33:55.193" endtime="20220114 13:33:55.193"/>
+</kw>
+<msg timestamp="20220114 13:33:55.193" level="INFO">${email} = loripierce@randomemail.com</msg>
+<status status="PASS" starttime="20220114 13:33:55.192" endtime="20220114 13:33:55.193"/>
+</kw>
+<kw name="Enter text" library="common">
+<arg>${EMAIL_INPUT}</arg>
+<arg>${email}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:55.194" endtime="20220114 13:33:55.207"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:55.208" level="INFO">Typing text 'loripierce@randomemail.com' into text field '//*[@placeholder='Watch out for typos']'.</msg>
+<status status="PASS" starttime="20220114 13:33:55.207" endtime="20220114 13:33:55.343"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.193" endtime="20220114 13:33:55.343"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.192" endtime="20220114 13:33:55.343"/>
+</kw>
+<kw name="Enter phone number" library="user_details_keywords">
+<kw name="Generate random phone number" library="data_creation">
+<var>${phonenumber}</var>
+<kw name="Random Number" library="FakerLibrary">
+<var>${phone_number}</var>
+<arg>digits=9</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<msg timestamp="20220114 13:33:55.344" level="INFO">${phone_number} = 401625703</msg>
+<status status="PASS" starttime="20220114 13:33:55.343" endtime="20220114 13:33:55.344"/>
+</kw>
+<msg timestamp="20220114 13:33:55.344" level="INFO">${phonenumber} = 401625703</msg>
+<status status="PASS" starttime="20220114 13:33:55.343" endtime="20220114 13:33:55.344"/>
+</kw>
+<kw name="Enter text" library="common">
+<arg>${PHONE_INPUT}</arg>
+<arg>${phonenumber}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:55.344" endtime="20220114 13:33:55.357"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:55.357" level="INFO">Typing text '401625703' into text field '//*[@placeholder='+1 201-555-0123']'.</msg>
+<status status="PASS" starttime="20220114 13:33:55.357" endtime="20220114 13:33:55.442"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.344" endtime="20220114 13:33:55.442"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.343" endtime="20220114 13:33:55.442"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:54.517" endtime="20220114 13:33:55.442"/>
+</kw>
+<kw name="Enter a note to captain" library="user_details_keywords">
+<arg>Ahoy captain!</arg>
+<kw name="Enter text" library="common">
+<arg>${NOTE_TEXT_AREA}</arg>
+<arg>${note}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:55.444" endtime="20220114 13:33:55.457"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:55.458" level="INFO">Typing text 'Ahoy captain!' into text field '//textarea[@data-testid='special-requests-textarea']'.</msg>
+<status status="PASS" starttime="20220114 13:33:55.457" endtime="20220114 13:33:55.534"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.443" endtime="20220114 13:33:55.534"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.443" endtime="20220114 13:33:55.535"/>
+</kw>
+<kw name="Click continue button" library="user_details_page">
+<kw name="Click on element" library="common">
+<arg>${CONTINUE_BTN}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:55.535" endtime="20220114 13:33:55.548"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:55.548" endtime="20220114 13:33:55.557"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:55.557" level="INFO">Clicking element '//button[@type= 'submit']'.</msg>
+<status status="PASS" starttime="20220114 13:33:55.557" endtime="20220114 13:33:55.611"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.535" endtime="20220114 13:33:55.611"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.535" endtime="20220114 13:33:55.611"/>
+</kw>
+<kw name="Enter payment details" library="payment_keywords">
+<arg>${CARD_NUMBER}</arg>
+<arg>${EXPIRY_DATE}</arg>
+<arg>${CVV}</arg>
+<arg>${NAME}</arg>
+<arg>${LAST_NAME}</arg>
+<kw name="Enter card number" library="payment_keywords">
+<arg>${card_number}</arg>
+<kw name="Enter text into iFrame" library="common">
+<arg>${CARD_IFRAME}</arg>
+<arg>${CREDIT_CARD_NUMBER}</arg>
+<arg>${card_number}</arg>
+<kw name="Select iFrame" library="common">
+<arg>${iframe}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:55.613" endtime="20220114 13:33:57.153"/>
+</kw>
+<kw name="Select Frame" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<msg timestamp="20220114 13:33:57.153" level="INFO">Selecting frame 'css:#braintree-hosted-field-number'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.153" endtime="20220114 13:33:57.247"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.613" endtime="20220114 13:33:57.247"/>
+</kw>
+<kw name="Enter text" library="common">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.248" endtime="20220114 13:33:57.264"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:57.264" level="INFO">Typing text '4111111111111111' into text field '//input[@id='credit-card-number']'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.264" endtime="20220114 13:33:57.319"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.247" endtime="20220114 13:33:57.319"/>
+</kw>
+<kw name="Unselect iFrame" library="common">
+<kw name="Unselect Frame" library="SeleniumLibrary">
+<doc>Sets the main frame as the current frame.</doc>
+<status status="PASS" starttime="20220114 13:33:57.320" endtime="20220114 13:33:57.327"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.320" endtime="20220114 13:33:57.327"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.613" endtime="20220114 13:33:57.328"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.612" endtime="20220114 13:33:57.328"/>
+</kw>
+<kw name="Enter card expiry date" library="payment_keywords">
+<arg>${expiry_date}</arg>
+<kw name="Enter text into iFrame" library="common">
+<arg>${EXPIRY_DATE_IFRAME}</arg>
+<arg>${EXPIRY_DATE_INPUT}</arg>
+<arg>${expiry_date}</arg>
+<kw name="Select iFrame" library="common">
+<arg>${iframe}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.330" endtime="20220114 13:33:57.346"/>
+</kw>
+<kw name="Select Frame" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<msg timestamp="20220114 13:33:57.347" level="INFO">Selecting frame 'css:#braintree-hosted-field-expirationDate'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.346" endtime="20220114 13:33:57.361"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.329" endtime="20220114 13:33:57.361"/>
+</kw>
+<kw name="Enter text" library="common">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.362" endtime="20220114 13:33:57.375"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:57.376" level="INFO">Typing text '1025' into text field '//*[@placeholder='MM/YY']'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.375" endtime="20220114 13:33:57.421"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.361" endtime="20220114 13:33:57.421"/>
+</kw>
+<kw name="Unselect iFrame" library="common">
+<kw name="Unselect Frame" library="SeleniumLibrary">
+<doc>Sets the main frame as the current frame.</doc>
+<status status="PASS" starttime="20220114 13:33:57.422" endtime="20220114 13:33:57.423"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.421" endtime="20220114 13:33:57.423"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.329" endtime="20220114 13:33:57.423"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.328" endtime="20220114 13:33:57.423"/>
+</kw>
+<kw name="Enter card security code" library="payment_keywords">
+<arg>${cvv}</arg>
+<kw name="Enter text into iFrame" library="common">
+<arg>${SECURITY_CODE_IFRAME}</arg>
+<arg>${SECURITY_CODE_INPUT}</arg>
+<arg>${security_code}</arg>
+<kw name="Select iFrame" library="common">
+<arg>${iframe}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.424" endtime="20220114 13:33:57.437"/>
+</kw>
+<kw name="Select Frame" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<msg timestamp="20220114 13:33:57.437" level="INFO">Selecting frame 'css:#braintree-hosted-field-cvv'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.437" endtime="20220114 13:33:57.450"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.424" endtime="20220114 13:33:57.451"/>
+</kw>
+<kw name="Enter text" library="common">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.451" endtime="20220114 13:33:57.464"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:57.464" level="INFO">Typing text '222' into text field '//*[@placeholder='CVV']'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.464" endtime="20220114 13:33:57.506"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.451" endtime="20220114 13:33:57.506"/>
+</kw>
+<kw name="Unselect iFrame" library="common">
+<kw name="Unselect Frame" library="SeleniumLibrary">
+<doc>Sets the main frame as the current frame.</doc>
+<status status="PASS" starttime="20220114 13:33:57.506" endtime="20220114 13:33:57.509"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.506" endtime="20220114 13:33:57.509"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.424" endtime="20220114 13:33:57.509"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.423" endtime="20220114 13:33:57.509"/>
+</kw>
+<kw name="Enter name on the card" library="payment_keywords">
+<arg>${name}</arg>
+<arg>${last_name}</arg>
+<kw name="Catenate" library="BuiltIn">
+<var>${name_on_the_card}</var>
+<arg>${name} ${last name}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20220114 13:33:57.510" level="INFO">${name_on_the_card} = Lori Pierce</msg>
+<status status="PASS" starttime="20220114 13:33:57.509" endtime="20220114 13:33:57.510"/>
+</kw>
+<kw name="Enter text into iFrame" library="common">
+<arg>${CARD_HOLDER_NAME_IFRAME}</arg>
+<arg>${CARD_HOLDER_NAME_INPUT}</arg>
+<arg>${name_on_the_card}</arg>
+<kw name="Select iFrame" library="common">
+<arg>${iframe}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.510" endtime="20220114 13:33:57.524"/>
+</kw>
+<kw name="Select Frame" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<msg timestamp="20220114 13:33:57.525" level="INFO">Selecting frame 'css:#braintree-hosted-field-cardholderName'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.524" endtime="20220114 13:33:57.538"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.510" endtime="20220114 13:33:57.538"/>
+</kw>
+<kw name="Enter text" library="common">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.539" endtime="20220114 13:33:57.550"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:57.551" level="INFO">Typing text 'Lori Pierce' into text field 'css:input[class='cardholderName']'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.550" endtime="20220114 13:33:57.598"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.538" endtime="20220114 13:33:57.598"/>
+</kw>
+<kw name="Unselect iFrame" library="common">
+<kw name="Unselect Frame" library="SeleniumLibrary">
+<doc>Sets the main frame as the current frame.</doc>
+<status status="PASS" starttime="20220114 13:33:57.599" endtime="20220114 13:33:57.600"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.598" endtime="20220114 13:33:57.600"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.510" endtime="20220114 13:33:57.600"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.509" endtime="20220114 13:33:57.600"/>
+</kw>
+<kw name="Enter zip code" library="payment_keywords">
+<kw name="Generate random zip code" library="data_creation">
+<var>${zip_code}</var>
+<kw name="Random Number" library="FakerLibrary">
+<var>${zip_code}</var>
+<arg>digits=5</arg>
+<doc>Generate a random integer according to the following rules:</doc>
+<msg timestamp="20220114 13:33:57.601" level="INFO">${zip_code} = 56786</msg>
+<status status="PASS" starttime="20220114 13:33:57.601" endtime="20220114 13:33:57.601"/>
+</kw>
+<msg timestamp="20220114 13:33:57.601" level="INFO">${zip_code} = 56786</msg>
+<status status="PASS" starttime="20220114 13:33:57.601" endtime="20220114 13:33:57.601"/>
+</kw>
+<kw name="Enter text into iFrame" library="common">
+<arg>${POSTAL_CODE_IFRAME}</arg>
+<arg>${POSTAL_CODE_INPUT}</arg>
+<arg>${zip_code}</arg>
+<kw name="Select iFrame" library="common">
+<arg>${iframe}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.602" endtime="20220114 13:33:57.614"/>
+</kw>
+<kw name="Select Frame" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<msg timestamp="20220114 13:33:57.614" level="INFO">Selecting frame 'css:#braintree-hosted-field-postalCode'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.614" endtime="20220114 13:33:57.627"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.602" endtime="20220114 13:33:57.627"/>
+</kw>
+<kw name="Enter text" library="common">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.627" endtime="20220114 13:33:57.639"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:57.639" level="INFO">Typing text '56786' into text field '//input[@id='postal-code']'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.639" endtime="20220114 13:33:57.693"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.627" endtime="20220114 13:33:57.693"/>
+</kw>
+<kw name="Unselect iFrame" library="common">
+<kw name="Unselect Frame" library="SeleniumLibrary">
+<doc>Sets the main frame as the current frame.</doc>
+<status status="PASS" starttime="20220114 13:33:57.694" endtime="20220114 13:33:57.695"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.693" endtime="20220114 13:33:57.695"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.601" endtime="20220114 13:33:57.695"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.600" endtime="20220114 13:33:57.695"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:55.612" endtime="20220114 13:33:57.695"/>
+</kw>
+<kw name="Click on confirm booking button" library="payment_page">
+<kw name="Click on element" library="common">
+<arg>${CONFIRM_BOOKING_BTN}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.696" endtime="20220114 13:33:57.706"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:33:57.707" endtime="20220114 13:33:57.715"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:33:57.715" level="INFO">Clicking element '//button[@type= 'submit']'.</msg>
+<status status="PASS" starttime="20220114 13:33:57.715" endtime="20220114 13:33:57.747"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.696" endtime="20220114 13:33:57.747"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.696" endtime="20220114 13:33:57.747"/>
+</kw>
+<kw name="Click on close dialog" library="summary_page">
+<kw name="Click on element" library="common">
+<arg>${CLOSE_DIALOG_BTN}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>timeout=40</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220114 13:33:57.748" endtime="20220114 13:34:13.037"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" starttime="20220114 13:34:13.038" endtime="20220114 13:34:13.045"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:34:13.045" level="INFO">Clicking element '//button[@class= 'close']'.</msg>
+<status status="PASS" starttime="20220114 13:34:13.045" endtime="20220114 13:34:13.081"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.748" endtime="20220114 13:34:13.081"/>
+</kw>
+<status status="PASS" starttime="20220114 13:33:57.747" endtime="20220114 13:34:13.081"/>
+</kw>
+<kw name="Save booking id to text file" library="summary_keywords">
+<kw name="Get element text" library="common">
+<var>${trip_id}</var>
+<arg>${TRIP_ID}</arg>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>${locator}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20220114 13:34:13.106" level="INFO">${text} = 740424.</msg>
+<status status="PASS" starttime="20220114 13:34:13.083" endtime="20220114 13:34:13.106"/>
+</kw>
+<msg timestamp="20220114 13:34:13.106" level="INFO">${trip_id} = 740424.</msg>
+<status status="PASS" starttime="20220114 13:34:13.082" endtime="20220114 13:34:13.106"/>
+</kw>
+<kw name="Remove String" library="String">
+<var>${booking_id}</var>
+<arg>${trip_id}</arg>
+<arg>.</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<msg timestamp="20220114 13:34:13.107" level="INFO">${booking_id} = 740424</msg>
+<status status="PASS" starttime="20220114 13:34:13.107" endtime="20220114 13:34:13.107"/>
+</kw>
+<kw name="Create File" library="OperatingSystem">
+<arg>${EXECDIR}/booking_id.txt</arg>
+<arg>${booking_id}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<msg timestamp="20220114 13:34:13.108" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Igor\projects\pythonProject\booking_id.txt"&gt;C:\Users\Igor\projects\pythonProject\booking_id.txt&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20220114 13:34:13.107" endtime="20220114 13:34:13.108"/>
+</kw>
+<status status="PASS" starttime="20220114 13:34:13.082" endtime="20220114 13:34:13.108"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20220114 13:34:13.108" endtime="20220114 13:34:15.205"/>
+</kw>
+<doc>This test covers scenario where a user books "Single Fisherman Special" trip for one adult and
+one child, and the script automaticaly saves the confirmation code to booking_id.txt file</doc>
+<status status="PASS" starttime="20220114 13:33:37.938" endtime="20220114 13:34:15.205"/>
+</test>
+<status status="PASS" starttime="20220114 13:33:37.444" endtime="20220114 13:34:15.207"/>
+</suite>
+<status status="PASS" starttime="20220114 13:33:37.427" endtime="20220114 13:34:15.208"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Book Trip Test">Tests.Book Trip Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
